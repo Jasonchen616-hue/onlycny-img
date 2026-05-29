@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片压缩工具</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../web-tools/legal.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <h1 class="page-title">图片压缩工具</h1>
+        <p class="page-desc">选择图片，在浏览器本地压缩并下载。</p>
+      </header>
+
+      <main class="panel">
+        <section class="block">
+          <label class="block-label">选择图片</label>
+          <div
+            class="dropzone"
+            id="dropzone"
+            tabindex="0"
+            role="button"
+            aria-label="点击或拖拽图片到此处"
+          >
+            <p class="dropzone-text">点击选择，或将图片拖拽到此处</p>
+            <p class="dropzone-hint">支持 JPG、JPEG、PNG、WebP，单张最大 20MB</p>
+          </div>
+          <input
+            type="file"
+            id="file-input"
+            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            hidden
+          />
+        </section>
+
+        <section class="block">
+          <h2 class="block-label">参数</h2>
+          <div class="params-grid">
+            <div class="field">
+              <label class="field-label" for="cmp-quality">压缩质量（0.1–1）</label>
+              <input
+                type="number"
+                id="cmp-quality"
+                class="field-control"
+                value="0.8"
+                min="0.1"
+                max="1"
+                step="0.05"
+              />
+            </div>
+            <div class="field">
+              <label class="field-label" for="cmp-format">输出格式</label>
+              <select id="cmp-format" class="field-control">
+                <option value="original" selected>保持原格式</option>
+                <option value="jpeg">JPG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WebP</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label" for="cmp-max-width">最大宽度（px，可选）</label>
+              <input
+                type="number"
+                id="cmp-max-width"
+                class="field-control"
+                placeholder="不限制"
+                min="1"
+                step="1"
+              />
+            </div>
+            <div class="field">
+              <label class="field-label" for="cmp-max-height">最大高度（px，可选）</label>
+              <input
+                type="number"
+                id="cmp-max-height"
+                class="field-control"
+                placeholder="不限制"
+                min="1"
+                step="1"
+              />
+            </div>
+          </div>
+          <p class="format-note" id="format-note" hidden>
+            PNG 本身不一定明显变小，JPG/WebP 更适合压缩照片。
+          </p>
+        </section>
+
+        <section class="block info-panel" id="info-panel" hidden>
+          <h2 class="block-label">图片信息</h2>
+          <dl class="info-list">
+            <div class="info-row">
+              <dt>原文件名</dt>
+              <dd id="info-name">—</dd>
+            </div>
+            <div class="info-row">
+              <dt>原文件大小</dt>
+              <dd id="info-original-size">—</dd>
+            </div>
+            <div class="info-row">
+              <dt>压缩后大小</dt>
+              <dd id="info-compressed-size">—</dd>
+            </div>
+            <div class="info-row">
+              <dt>压缩比例</dt>
+              <dd id="info-ratio">—</dd>
+            </div>
+            <div class="info-row">
+              <dt>图片宽高</dt>
+              <dd id="info-dimensions">—</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block-label">预览</h2>
+          <div class="compare-preview">
+            <div class="compare-col">
+              <p class="compare-label">原图</p>
+              <div class="preview-box">
+                <p class="preview-placeholder" id="preview-original-empty">暂无图片</p>
+                <img id="preview-original" class="preview-img" alt="原图预览" hidden />
+              </div>
+            </div>
+            <div class="compare-col">
+              <p class="compare-label">压缩后</p>
+              <div class="preview-box">
+                <p class="preview-placeholder" id="preview-compressed-empty">尚未压缩</p>
+                <img id="preview-compressed" class="preview-img" alt="压缩后预览" hidden />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="actions" role="group" aria-label="操作">
+          <button type="button" class="btn btn-primary" id="btn-pick">选择图片</button>
+          <button type="button" class="btn btn-primary" id="btn-compress" disabled>开始压缩</button>
+          <button type="button" class="btn btn-default" id="btn-download" disabled>下载压缩图片</button>
+          <button type="button" class="btn btn-default" id="btn-clear">清空</button>
+        </div>
+
+        <p class="hint" id="hint" role="status" aria-live="polite" hidden></p>
+      </main>
+    </div>
+    <footer class="site-legal-footer" role="contentinfo">
+      <nav class="site-legal-footer__nav" aria-label="网站信息">
+        <a href="../web-tools/about.html">关于我们</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/privacy.html">隐私政策</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/disclaimer.html">免责声明</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/terms.html">使用条款</a><span class="sep" aria-hidden="true">｜</span>
+        <a href="../web-tools/contact.html">联系我们</a>
+      </nav>
+    </footer>
+
+
+    <script src="app.js"></script>
+  </body>
+</html>
